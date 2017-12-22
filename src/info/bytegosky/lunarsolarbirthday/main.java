@@ -20,7 +20,7 @@ public class main
             System.out.print("请输入公历出生年份(例:公历1999年1月2日出生输入:1999): ");
             solar_year = scanner.nextInt();
         }
-        while(solar_year > 2100 || solar_year < 1900);
+        while(solar_year > 2099 || solar_year < 1900);
         do
         {
             System.out.print("请输入公历出生月份(例:公历1999年1月2日出生输入:01): ");
@@ -38,7 +38,7 @@ public class main
             System.out.print("请输入阴历出生年份(例:阴历丙寅年肆月廿一出生输入:1986): ");
             lunar_year = scanner.nextInt();
         }
-        while(lunar_year > 2100 || lunar_year < 1900);
+        while(lunar_year > 2099 || lunar_year < 1900);
         do
         {
             System.out.print("请输入阴历出生月份(例:阴历丙寅年肆月廿一出生输入:04): ");
