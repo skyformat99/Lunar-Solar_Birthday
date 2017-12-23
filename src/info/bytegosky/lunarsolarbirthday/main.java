@@ -35,30 +35,23 @@ public class main
         while(solar_day <= 0 || solar_day > 31);
         do
         {
-            System.out.print("请输入阴历出生年份(例:阴历丙寅年肆月廿一出生输入:1986): ");
-            lunar_year = scanner.nextInt();
-        }
-        while(lunar_year > 2099 || lunar_year < 1900);
-        do
-        {
-            System.out.print("请输入阴历出生月份(例:阴历丙寅年肆月廿一出生输入:04): ");
-            lunar_month = scanner.nextInt();
-        }
-        while(lunar_month > 12 || lunar_month <= 0);
-        do
-        {
-            System.out.print("请输入阴历出生日(例:阴历丙寅年肆月廿一出生输入:21): ");
-            lunar_day = scanner.nextInt();
-        }
-        while(lunar_day <= 0 || lunar_day > 31);
-        do
-        {
             System.out.print("请输入从公历出生年起查询年数(上限直到2099年): ");
             times = scanner.nextInt();
         }
         while (solar_year + times > 2099 || times == 0);
+        Lunar lunar_origin = new Solar(solar_year, solar_month, solar_day).getLunar(); //获取农历
+        //赋值农历
+        lunar_year = lunar_origin.getYear();
+        lunar_month = lunar_origin.getMonth();
+        lunar_day = lunar_origin.getDay();
+        //输出
+        System.out.println("公历生日: "+solar_year+"年"+solar_month+"月"+solar_day+"日");
+        System.out.println("农历生日: "+lunar_origin.toString());
+        //确保出生那一年不被计算
+        solar_year++;lunar_year++;
+        //开始计算
         System.out.println("正在计算...(仅输出重叠日期)");
-        System.out.printf("|%-15s|%-15s|%-3s|\n", "公历生日的公历日期", "农历生日的公历日期", "结果");
+        System.out.printf("|%-8s|%-8s|%-3s|\n", "公历生日的公历日期", "农历生日的公历日期", "结果");
         for(int i = 0; i <= times; i++)
         {
             Solar solar_date = new Solar(solar_year, solar_month, solar_day); //创建一个公历对象
@@ -66,7 +59,7 @@ public class main
             if(solar_date.getLunar().toString().equals(lunar_date.toString())) //比较公历->农历与农历日期是否相符
             {
                 //相符
-                System.out.printf("|%-15s|%-15s|%-3s|\n", solar_date.toString(), lunar_date.getSolar().toString(), "重叠");
+                System.out.printf("|%-17s|%-17s|%-3s|\n", solar_date.toString(), lunar_date.getSolar().toString(), "重叠");
                 solar_year++;
                 lunar_year++;
                 //清除对象
